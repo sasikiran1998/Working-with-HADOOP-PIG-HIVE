@@ -1,4 +1,4 @@
-# Working-HIVE
+# Working-with-HIVE
 Complete installation and using Hadoop, hive and basic commands.
 
 ## HADOOP
