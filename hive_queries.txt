@@ -1,0 +1,359 @@
+          INSTALLING OF HADOOP , HIVE 
+
+
+
+These softwares should be prepared to install Hadoop 2.8.0 on window 64bit
+
+1. Download Hadoop 2.8.0 
+2. Java JDK 1.8.0.zip 
+
+
+Java is downloaded from the link:
+
+https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+
+Hadoop is downloaded from the link:
+
+https://hadoop.apache.org/release/2.8.0.html
+
+
+Set up
+
+
+First step is to install java under “C:\JAVA”
+
+
+Check for successful installation of Java as: in cmd; “Javac -version” to check.
+
+Extract file Hadoop 2.8.0.tar.gz or Hadoop-2.8.0.zip and place under “C:\Hadoop-2.8.0”.
+
+
+Set the path HADOOP_HOME Environment variable on windows 7 as “C:\Hadoop-2.8.0\bin".
+
+Set the path JAVA_HOME Environment variable on windows 7 as C:\Java\bin".
+
+
+Next we set the Hadoop bin directory path and JAVA bin directory path.
+
+
+Configuration
+
+
+1.Edit file C:/Hadoop-2.8.0/etc/hadoop/core-site.xml, paste below xml paragraph and save this file.
+
+<configuration>
+   <property>
+       <name>fs.defaultFS</name>
+       <value>hdfs://localhost:9000</value>
+   </property>
+</configuration>
+
+
+2.Rename “mapred-site.xml.template” to “mapred-site.xml” and edit this file C:/Hadoop-2.8.0/etc/hadoop/mapred-site.xml, paste below xml paragraph and save this file.
+
+<configuration>
+   <property>
+       <name>mapreduce.framework.name</name>
+       <value>yarn</value>
+   </property>
+</configuration>
+
+
+3.
+Create folder “data” under “C:\Hadoop-2.8.0”
+Create folder “datanode” under “C:\Hadoop-2.8.0\data”
+Create folder “namenode” under “C:\Hadoop-2.8.0\data”
+
+
+4.
+Edit file C:\Hadoop-2.8.0/etc/hadoop/hdfs-site.xml, paste below xml paragraph and save this file.
+
+<configuration>
+   <property>
+       <name>dfs.replication</name>
+       <value>1</value>
+   </property>
+   <property>
+       <name>dfs.namenode.name.dir</name>
+       <value>/hadoop-2.8.0/data/namenode</value>
+   </property>
+   <property>
+       <name>dfs.datanode.data.dir</name>
+       <value>/hadoop-2.8.0/data/datanode</value>
+   </property>
+</configuration>
+
+
+5.Edit file C:/Hadoop-2.8.0/etc/hadoop/yarn-site.xml, paste below xml paragraph and save this file.
+
+<configuration>
+   <property>
+    	<name>yarn.nodemanager.aux-services</name>
+    	<value>mapreduce_shuffle</value>
+   </property>
+   <property>
+      	<name>yarn.nodemanager.auxservices.mapreduce.shuffle.class</name>  
+	<value>org.apache.hadoop.mapred.ShuffleHandler</value>
+   </property>
+</configuration>
+
+
+6.Edit file C:/Hadoop-2.8.0/etc/hadoop/hadoop-env.cmd by closing the command line “JAVA_HOME=%JAVA_HOME%” instead of set “JAVA_HOME=C:\Java” (On C:\java this is path to file jdk.18.0)
+java path
+
+
+Hadoop Configuration
+
+Dowload file Hadoop Configuration.zip
+
+Delete file bin on C:\Hadoop-2.8.0\bin, replaced by file bin on file just download (from Hadoop Configuration.zip).
+
+Open cmd and typing command “hdfs namenode –format”
+
+After successfull opening and running of hdfs namenode the next step is to run hadoop.
+
+
+STARTING HADOOP:
+
+
+1.Open cmd and change directory to “C:\Hadoop-2.8.0\sbin” and type 
+“start-all.cmd” or "start-dfs.cmd" and "start-yarn.cmd" to start apache.
+
+
+2.Make sure these apps are running
+Hadoop Namenode
+Hadoop datanode
+YARN Resourc Manager
+YARN Node Manager
+
+ ->If Datanode has shutdown then delete the files in hadoop/data/datanode folder and run again.
+ ->If Namenode has shutdown then delete the files in hadoop/data/namenode folder and run again.
+
+
+3.Open: http://localhost:8088
+
+
+4.Open for namenode: http://localhost:50070
+
+
+5.Open for datanode: http://localhost:50075
+
+If all works fine then hadoop is successfully installed.
+
+
+
+
+        INSTALLATION OF HIVE:
+
+
+1.Install derby by the following link:
+
+https://archive.apache.org/dist/db/derby/db-derby-10.12.1.1/
+
+
+2.Install hive by the following link:
+
+https://archive.apache.org/dist/hive/hive-2.1.0/
+
+Also download the xml file from the following link:
+
+https://drive.google.com/file/d/1qqAo7RQfr5Q6O-GTom6Rji3TdufP81zd/view
+
+after successfull download of the xml file then put that into hive/config folder.
+
+
+3.Set paths for derby and hive:
+
+set DERBY_HOME="C:/dreby/bin"
+
+set HIVE_HOME="C:/hive/bin"
+
+set the Hive bin directory path and Derby bin directory path.
+
+
+4.Start the cmd ,change the directory to c:/derby/bin and run the command: startNetworkServer -h 0.0.0.0
+
+
+5.Start the cmd, change the directory to c:/hive/bin and run the command: hive
+
+
+6.After the successfull run of hive then proceed to create the databases and tables.
+
+
+
+
+        INSTALLATION OF PIG:
+
+
+1.Install pig by the following link:
+
+http://apachemirror.wuchna.com/pig/pig-0.17.0/
+
+
+2.Extract file pig-0.17.0.tar.gz and place under "C:\Pig"
+
+
+3.Go inside of pig-0.17.0.tar folder and extract again –
+
+
+4.Copy the leaf folder “pig-0.17.0” and move to the root folder "C:\Pig" and removed all other files and folders
+
+
+5.Configure environment variables:
+
+Set the path for the following Environment variable (User Variables) on windows 7 – 
+PIG_HOME - C:\Pig\pig-0.17.0
+
+
+6.Configure system variables:
+
+Next we need to set System variable, including Hive bin directory path – 
+
+Variable: Path 
+Value: 
+C:\Pig\pig-0.17.0\bin
+
+
+7. Edit file C:/Pig/pig-0.17.0/bin/pig.cmd, make below changes and save this file.
+set HADOOP_BIN_PATH=%HADOOP_HOME%\libexec
+
+
+8.Post successful execution of Hadoop, change directory to “C:\Pig\pig-0.17.0\bin” and verify the installation.
+
+
+9.In the new cmd change dir to: “C:\Pig\pig-0.17.0\bin” and verify installation by typing the command pig -version;
+
+
+10.And again run the cmd by typing the command pig -x local, pig is running successfully.
+
+
+SUCCESS... 
+
+HADOOP , HIVE , PIG HAS BEEN SUCCESSFULLY BEEN INSTALLED AND READY TO BE USED.
+
+
+
+
+
+           WORKING WITH HIVE:
+
+START THE CMD AND CHANGE THE DIRECTORY TO  C:/DERBY/BIN AND RUN THE COMMAND  startNetworkServer -h 0.0.0.0
+
+START THE CMD AGAIN AND CHANGE THE DIRECTORY TO  C:/HIVE/BIN AND RUN THE COMMAND hive
+
+
+HIVE QUERIES:
+
+
+CREATE DATABASE:
+
+create database mydb;
+
+
+CREATE TABLE:
+
+
+create table employee(eno int,ename string,gender string,age int,phno int,dno int)
+row format
+delimited fields terminated by ',';
+
+create table dept(dno int,dname string,eno int)
+row format
+delimited fields terminated by ',';
+
+create table student(sno int,sname string,gender string,age int,phno int)
+row format
+delimited fields terminated by ',';
+
+
+
+LOADING THE DATA INTO THE TABLE:
+
+
+load data local inpath 'C:\employee.txt' into table employee
+
+load data local inpath 'C:\dept.txt' into table dept
+
+load data local inpath 'C:\student.txt' into table student
+
+
+DESCRIBE THE TABLE:
+
+
+desc employee;
+desc dept;
+desc student;
+
+
+BASIC QUERIES:
+
+
+select * from employee left outer join dept on employee.eno=dept.eno;
+
+select * from employee right outer join dept on employee.eno=dept.eno;
+
+SELECT * FROM employee FULL outer JOIN dept ON employee.eno=dept.eno;
+
+
+
+SELECT * FROM employee,dept WHERE employee.eno=dept.eno;
+
+
+
+VIEWS:
+
+CREATE VIEW empdep AS SELECT * FROM employee WHERE dno==100
+
+SELECT VIEW:
+SELECT * FROM empdep;
+
+DROP VIEW:
+DROP VIEW empdep;
+
+
+
+CREATE TABLE vaccine (entity string, code string, day date,total_vaccinations_per_hundred float) row format delimited fields terminated by ',';
+OK
+
+LOAD DATA LOCAL INPATH 'C:\Users\sasi\hive\covid-vaccination.csv' OVERWRITE INTO TABLE vaccine;
+
+select * from vaccine where code='AFG';
+
+CREATE TABLE peoplevaccine (entity string, code string, day date,people_vaccinated double) row format delimited fields terminated by ',';
+OK
+
+LOAD DATA LOCAL INPATH 'C:\Users\sasi\hive\people-vaccinated.csv' OVERWRITE INTO TABLE peoplevaccine;
+
+
+PARTITIONS:
+
+create table part_vaccine(entity string, day date, total_vaccination_per_hundred float) partitioned by(code string);
+OK
+No rows affected (0.483 seconds)
+hive> load data local inpath 'C:\Users\sasi\hive\covid-vaccination.csv' into table part_vaccine
+. . > partition(code = "AFG");
+
+VIEWS:
+
+create view vaccine_1cr as
+. . > select * from peoplevaccine
+. . > where people_vaccinated>700000;
+
+JOINS
+
+INNER JOIN
+
+select v.code,v.total_vaccinations_per_hundred,p.code,p.people_vaccinated from vaccine v join peoplevaccine p on (v.code=p.code);
+
+LEFT OUTER JOIN
+
+select v.code,v.total_vaccinations_per_hundred,p.code,p.people_vaccinated from vaccine v left outer join peoplevaccine p on (v.code=p.code);
+
+RIGHT OUTER JOIN
+
+select v.code,v.total_vaccinations_per_hundred,p.code,p.people_vaccinated from vaccine v right outer join peoplevaccine p on (v.code=p.code);
+
+FULL OUTER JOIN
+
+select v.code,v.total_vaccinations_per_hundred,p.code,p.people_vaccinated from vaccine v full outer join peoplevaccine p on (v.code=p.code);
